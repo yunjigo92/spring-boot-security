@@ -17,16 +17,18 @@
 
 - Java : jdk 11 이상 (moden java 에 대해 알아야 함)
 - spring boot : 스프링 애플리케이션 프레임워크
-- JUnit5 와 spring test : 기본적인 기능 테스트를 위해 필요함.
+- gradle : 프로젝트 관리 및 빌드
+- JUnit5(Jupyter)와 spring test : 기본적인 기능 테스트를 위해 필요함.
 - spring mvc 와 RESTFul 서비스 : 웹 MVC
 - spring data jpa : 인증을 DB에 저장함.
 - lombok : 실전 프로그래밍에 도움이 많이 줌.
 - thymeleaf : 웹 프로그램을 지원함
 - mysql : 데이터 테스트
+- IntelliJ IDE
 
 ## 이 강의에서 다룰 내용
 
-- Gradle 멀티 프로젝트 구성 방법
+- Gradle 멀티 프로젝트 구성과 모듈 프로젝트 개발
 - Spring Security의 기본 구조
 - Spring Security 를 활용한 로그인 방법 (Authentication)
 - Spring Security 를 활용한 권한 체크 방법 (Authorization)
