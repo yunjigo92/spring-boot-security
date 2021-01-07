@@ -7,7 +7,7 @@
   - paper
   - user-oauth2-support
   - web-util
-  -
+  - common-utils
 - web : 웹 컨트롤러나 리소스를 여러 서버에서 공통으로 사용하는 경우 web 컴포넌트로 관리한다.
   - user-admin-web
   - user-info-web
@@ -23,7 +23,7 @@
 
 - com.sp.fc 를 그룹명으로 하고 기본 패키지로한다. (version 은 1.0.0 으로 한다.)
 - 웹 애플리케이션은 com.sp.fc.web 밑에 xxxApplication.java 로 한다.
-- 모듈이 되는 프로젝트의 component 스캔이나 jap 설정 정보등은 com.sp.fc.config 밑에 xxxModule.java 클래스를 만들고 해당 모듈에 대한 설정을 기술한다. 이후에 서버에서 scanBasePackage 를 구성할 때 com.sp.fc.config 폴더를 기본으로 스캔하게 하기 위해서이다.
+- 모듈이 되는 프로젝트의 component 스캔이나 JPA 설정 정보등은 com.sp.fc.config 밑에 xxxModule.java 클래스를 만들고 해당 모듈에 대한 설정을 기술한다. 이후에 서버에서 scanBasePackage 를 구성할 때 com.sp.fc.config 폴더를 기본으로 스캔하게 하기 위해서이다.
 - lombok 을 사용한다. 특히 builder 패턴의 코딩을 주로 사용한다.
 
 ---
@@ -46,7 +46,7 @@
   @Builder
   ```
 
-- test1 (~test13)
+- test1 ( ... test13)
 
   ```java
   @DisplayName("1. $END$")
