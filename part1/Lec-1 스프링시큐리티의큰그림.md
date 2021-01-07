@@ -30,8 +30,8 @@
   - _LogoutFilter_ : 지금 로그아웃하겠다고 하는건가?
   - _UsernamePasswordAuthenticationFilter_ : username / password 로 로그인을 하려고 하는가? 만약 로그인이면 여기서 처리하고 가야 할 페이지로 보내 줄께.
   - _ConcurrentSessionFilter_ : 여거저기서 로그인 하는걸 허용할 것인가?
-  - _BearerTokenAuthenticationFilter_ : Authentication 해더에 Bearer 토큰이 오면 인증 처리 해줄께.
-  - _BasicAuthenticationFilter_ : Authentication 해더에 Basic 토큰을 주면 검사해서 인증처리 해줄께.
+  - _BearerTokenAuthenticationFilter_ : Authorization 해더에 Bearer 토큰이 오면 인증 처리 해줄께.
+  - _BasicAuthenticationFilter_ : Authorization 해더에 Basic 토큰을 주면 검사해서 인증처리 해줄께.
   - _RequestCacheAwareFilter_ : 방금 요청한 request 이력이 다음에 필요할 수 있으니 캐시에 담아놓을께.
   - _SecurityContextHolderAwareRequestFilter_ : 보안 관련 Servlet 3 스펙을 지원하기 위한 필터라고 한다.(?)
   - _RememberMeAuthenticationFilter_ : 아직 Authentication 인증이 안된 경우라면 RememberMe 쿠키를 검사해서 인증 처리해줄께
