@@ -1,4 +1,4 @@
-# Authenticatio 메커니즘
+# Authentication 메커니즘
 
 ## 인증 (Authentication)
 
