@@ -1,6 +1,6 @@
 # 로그인 하기
 
-- 스프링 프레임워크에서 로그인을 한다는 것은 authenticated 가 true인 Authentication 객체를 SecurityContext 에 갖고 있는 상태를 말합니다. 단 Authenticatio이 AnonymouseAuthenticationToken 만 아니면 됩니다.
+- 스프링 프레임워크에서 로그인을 한다는 것은 authenticated 가 true인 Authentication 객체를 SecurityContext 에 갖고 있는 상태를 말합니다. 단 Authentication이 AnonymouseAuthenticationToken 만 아니면 됩니다.
 
   ```
   로그인 == Authentication(authenticated = true) only if Authentication != AnonymouseAuthenticationToken
@@ -22,7 +22,7 @@
   - BasicAuthenticationFilter : ajax 로그인
   - OAuth2LoginAuthenticationFilter : 소셜 로그인
   - OpenIDAuthenticationFilter : OpenID 로그인
-  - Saml2WebSssoAuthenticationFilter : SAML2 로그인
+  - Saml2WebSsoAuthenticationFilter : SAML2 로그인
   - ... 기타
 
 - Authentication 을 제공(Provide) 하는 인증제공자는 여러개가 동시에 존재할 수 있고, 인증 방식에 따라 ProviderManager 도 복수로 존재할 수 있다.

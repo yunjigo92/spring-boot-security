@@ -5,8 +5,7 @@
 - GET /login 을 처리한다.
 - 별도의 로그인 페이지 설정을 하지 않으면 제공되는 필터이다.
 - 기본 로그인 폼을 제공한다.
-- OAuth2 소설 로그인과도 같이 사용할 수 있다.
--
+- OAuth2 / OpenID / Saml2 로그인과도 같이 사용할 수 있다.
 
 ## UsernamePasswordAuthenticationFilter
 
@@ -25,20 +24,39 @@
     - failureHandler
   - authenticationDetailSource : Authentication 객체의 details 에 들어갈 정보를 직접 만들어 줌.
 
+  ```java
+  @Override
+  public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+  		throws AuthenticationException {
+  	if (this.postOnly && !request.getMethod().equals("POST")) {
+  		throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
+  	}
+  	String username = obtainUsername(request);
+  	username = (username != null) ? username : "";
+  	username = username.trim();
+  	String password = obtainPassword(request);
+  	password = (password != null) ? password : "";
+  	UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
+  	// Allow subclasses to set the "details" property
+  	setDetails(request, authRequest);
+  	return this.getAuthenticationManager().authenticate(authRequest);
+  }
+  ```
+
 ## DefaultLogoutPageGeneratingFilter
 
 - GET /logout 을 처리한다.
 - POST /logout 을 요청할 수 있는 UI 를 제공한다.
-- csrf
+- csrf 토큰이 처리된다.
 
 ## LogoutFilter
 
 - POST /logout 을 처리한다. processiongUrl 을 변경하면 바꿀 수 있다.
 - 로그 아웃을 처리한다.
-  - session 삭제
-  - Authentication 삭제
-  - 쿠키 삭제
+
+  - session, SecurityContext, csrf, 쿠키, remember-me 쿠키 등응ㄹ 삭제한다.
   - (기본) 로그인 페이지로 redirect
+
   ```java
   private void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
   		throws IOException, ServletException {
@@ -54,3 +72,19 @@
   	chain.doFilter(request, response);
   }
   ```
+
+- LogoutHandler
+
+  - void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication);
+  - SecurityContextLogoutHandler : 세션과 SecurityContext 를 clear 한다.
+  - CookieClearingLogoutHandler : clear 대상이 된 쿠키들을 삭제한다.
+  - CsrfLogoutHandler : csrfTokenRepository 에서 csrf 토큰을 clear 한다.
+  - HeaderWriterLogoutHandler
+  - RememberMeServices : remember-me 쿠키를 삭제한다.
+  - LogoutSuccessEventPublishingLogoutHandler : 로그아웃이 성공하면 이벤트를 발행한다.
+
+- LogoutSuccessHandler
+
+  - void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+    throws IOException, ServletException;
+  - SimpleUrlLogoutSuccessHandler
