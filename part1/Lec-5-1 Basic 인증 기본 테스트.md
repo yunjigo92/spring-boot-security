@@ -4,7 +4,7 @@
 
 ## 실습 소스
 
-- 기본적으로 SPA로만 서비스하는 사이트이다. 그래서 form 로그인이 필요없다.
+- 기본적으로 SPA로만 서비스하는 사이트이다. 그래서 form 로그인이 필요없습니다.
 - 아래와 같이 필터체인을 설정하고
 
   ```java
@@ -48,7 +48,7 @@
   }
   ```
 
-- 아래와 같이 테스트를 진행하면 된다.
+- 아래와 같이 테스트를 진행합니다.
 
   ```java
   @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

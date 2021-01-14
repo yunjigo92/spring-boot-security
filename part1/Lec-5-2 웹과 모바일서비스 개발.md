@@ -13,8 +13,7 @@
 
 ## 구현하기
 
-- Student 객체를 다음 속성을 갖는 객체로 만듭니다.
-  - username
-  - password
-  - displayName
-  - authorities
+- 멀티 체인을 구성해 서비스를 서비스 한다.
+  <img src="../images/fig-11-multichain.png" width="600" style="max-width:600px;width:100%;" />
+
+- 웹 리소스를 재사용하기 위해 student-teacher 웹모듈을 만든다.
