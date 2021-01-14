@@ -2,15 +2,15 @@
 
 ## DefaultLoginPageGeneratingFilter
 
-- GET /login 을 처리한다.
-- 별도의 로그인 페이지 설정을 하지 않으면 제공되는 필터이다.
-- 기본 로그인 폼을 제공한다.
-- OAuth2 / OpenID / Saml2 로그인과도 같이 사용할 수 있다.
+- GET /login 을 처리
+- 별도의 로그인 페이지 설정을 하지 않으면 제공되는 필터
+- 기본 로그인 폼을 제공
+- OAuth2 / OpenID / Saml2 로그인과도 같이 사용할 수 있음.
 
 ## UsernamePasswordAuthenticationFilter
 
-- POST /login 을 처리한다. processingUrl 을 변경하면 주소를 바꿀 수 있다.
-- form 인증을 처리해주는 필터로 스프링 시큐리티에서 가장 일반적으로 쓰인다.
+- POST /login 을 처리. processingUrl 을 변경하면 주소를 바꿀 수 있음.
+- form 인증을 처리해주는 필터로 스프링 시큐리티에서 가장 일반적으로 쓰임.
 - 주요 설정 정보
 
   - filterProcessingUrl : 로그인을 처리해 줄 URL (POST)
@@ -45,16 +45,16 @@
 
 ## DefaultLogoutPageGeneratingFilter
 
-- GET /logout 을 처리한다.
-- POST /logout 을 요청할 수 있는 UI 를 제공한다.
-- csrf 토큰이 처리된다.
+- GET /logout 을 처리
+- POST /logout 을 요청할 수 있는 UI 를 제공
+- DefaultLoginPageGeneratingFilter 를 사용하는 경우에 같이 제공됨.
 
 ## LogoutFilter
 
-- POST /logout 을 처리한다. processiongUrl 을 변경하면 바꿀 수 있다.
-- 로그 아웃을 처리한다.
+- POST /logout 을 처리. processiongUrl 을 변경하면 바꿀 수 있음.
+- 로그 아웃을 처리
 
-  - session, SecurityContext, csrf, 쿠키, remember-me 쿠키 등응ㄹ 삭제한다.
+  - session, SecurityContext, csrf, 쿠키, remember-me 쿠키 등을 삭제처리 함.
   - (기본) 로그인 페이지로 redirect
 
   ```java
@@ -76,12 +76,12 @@
 - LogoutHandler
 
   - void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication);
-  - SecurityContextLogoutHandler : 세션과 SecurityContext 를 clear 한다.
-  - CookieClearingLogoutHandler : clear 대상이 된 쿠키들을 삭제한다.
-  - CsrfLogoutHandler : csrfTokenRepository 에서 csrf 토큰을 clear 한다.
+  - SecurityContextLogoutHandler : 세션과 SecurityContext 를 clear 함.
+  - CookieClearingLogoutHandler : clear 대상이 된 쿠키들을 삭제함.
+  - CsrfLogoutHandler : csrfTokenRepository 에서 csrf 토큰을 clear 함.
   - HeaderWriterLogoutHandler
-  - RememberMeServices : remember-me 쿠키를 삭제한다.
-  - LogoutSuccessEventPublishingLogoutHandler : 로그아웃이 성공하면 이벤트를 발행한다.
+  - RememberMeServices : remember-me 쿠키를 삭제함.
+  - LogoutSuccessEventPublishingLogoutHandler : 로그아웃이 성공하면 이벤트를 발행함.
 
 - LogoutSuccessHandler
 

@@ -10,3 +10,11 @@
 - 시나리오
   - 선생님과 학생이 각각 로그인을 한다.
   - 선생님은 모바일을 통해 학생 리스트를 조회할 수 있다.
+
+## 구현하기
+
+- Student 객체를 다음 속성을 갖는 객체로 만듭니다.
+  - username
+  - password
+  - displayName
+  - authorities

@@ -1,0 +1,40 @@
+# DaoAuthenticationManager와 UserDetailsService
+
+이제까지 User 정보는 모두 InMemory 상태에서 처리를 했습니다. 그런데, 실제 개발 상황에서 이렇게 쓰는 곳은 없습니다. 대부분 Mysql이나 Oracle 과 같은 RDBMS를 쓰거나, MongoDB 와 같은 기타 데이터베이스를 사용해 사용자를 관리합니다.
+
+실제로 스프링 시큐리티를 써서 서비스를 만들라고 하면, 대부분의 개발자들은 UserDetails 를 구현한 User 객체와 UserDetailsService 부터 만듭니다. 왜냐하면, UserDetailsService와 UserDetails 구현체만 구현하면 스프링 시큐리티가 나머지는 쉽게 쓸 수 있도록 도움을 많이 주기 때문입니다. 그런 다음, 나머지 부분은 하나하나 설정을 배워가면서 처리하는 식이죠.
+
+그렇다면 우리도 UserDetailsService와 UserDetails를 구현해서 스프링의 편리함을 한번 누려보도록 하겠습니다.
+
+먼저 연습 차원에서 기존 login-multi-chain 에서 사용했던 student, teacher 서비스를 student-teacher 컴포넌트 모듈을 만들어 보겠습니다. 코드를 재사용하겠다는 거죠.
+
+그런 다음 Student 를 UserDetails를 구현한 구현체로, StudentManager를 UserDetialsService 를 구현한 구현체로 확장해 보겠습니다.
+
+그렇게 되면 DaoAuthenticationProvider 가 StudentManager 를 가져다 쓰기 때문에
+
+## h2 DB 설정하기
+
+```yml
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  datasource:
+    url: jdbc:h2:mem:userdetails-test;
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+```
+
+## 실습 하기
+
+- userdetails-test 폴더를 만든다.
+- Student Entity와 Repository 를 만든다.
+- h2 DB 를 세팅한다.
+- UserDetails 와 UserDetailsService 를 만든다.
+- 로그인 이력을 history 에 남기기

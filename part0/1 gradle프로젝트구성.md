@@ -7,7 +7,7 @@
 
 ## settings.gradle
 
-settings 에서는 전체 프로젝트의 구조를 빌드한다. 일반적으로는
+settings 에서는 전체 프로젝트의 구조를 빌드합니다.. 일반적으로는
 
 ```groovy
 rootProject.name="project-name"
@@ -22,9 +22,9 @@ include ":sub-project1"
 include ":sub-project2"
 ```
 
-와 같이 하위 프로젝트들을 포함시켜 준다.
+와 같이 하위 프로젝트들을 포함시켜 줍니다.
 
-하지만 모듈 프로젝트들이 많아서 이들을 group 으로 관리하고 싶다면 다음과 같이 자동 빌드하는 스크립트를 쓰면 편리하다.
+하지만 모듈 프로젝트들이 많아서 이들을 group 으로 관리하고 싶다면 다음과 같이 자동 빌드하는 스크립트를 쓰면 편리합니다.
 
 ```groovy
 rootProject.name = 'security-gradle3'
@@ -73,7 +73,7 @@ rootProject.name = 'security-gradle3'
 
 ## build.gradle
 
-루트 폴더의 build.gradle 에서는 전체 하위 프로젝트의 공통 설정에 대한 사항을 기술해 넣는다.
+루트 폴더의 build.gradle 에서는 전체 하위 프로젝트의 공통 설정에 대한 사항을 기술해 넣습니다.
 
 ```groovy
 
@@ -164,6 +164,6 @@ help.enabled(false)
 
 - IntelliJ 에서 compiler.automake.allow.when.app.running 을 체크하고
 - 설정의 Build project automatically 를 체크하고
-- Run configuration 에서 On 'Update' action 과 On frame deactivation 의 값을 적절하게 수정해 준다.
+- Run configuration 에서 On 'Update' action 과 On frame deactivation 의 값을 적절하게 수정해 줍니다.
 
 참고 사이트 : https://velog.io/@bread_dd/Spring-Boot-Devtools
