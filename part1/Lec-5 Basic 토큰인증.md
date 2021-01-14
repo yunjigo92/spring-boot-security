@@ -3,7 +3,7 @@
 - 기본적으로 로그인 페이지를 사용할 수 없는 상황에서 사용한다.
 
   - SPA 페이지
-  - 모바일 (기본적으로는 JWT 토큰 방식을 써야 한다.)
+  - 브라우저 기반의 모바일 앱(브라우저 개반의 앱, ex: inoic )
 
 - SecurityContext 에 인증된 토큰이 없다면 아래와 같은 포멧의 토큰을 받아서 인증처리를 하고 간다.
 
@@ -18,3 +18,8 @@
 - SecurityContext 를 저장하고 있는 저장소에서 만료되지 않은 인증이 있으면 SecurityContextHolder 에 넣어준다. 이전에는 HttpSessionContextIntegrationFilter 이란 필터가 있었는데, 저장소가 반드시 세션일 필요는 없기 때문에 추상화된 객체로 발전된 필터라고 볼 수 있다.
 
 - HttpSessionSecurityContextRepository : 서버 세션에 SecurityContext 를 저장하는 기본 저장소이다.
+
+## Bearer 토큰
+
+- JWT 토큰
+- Opaque 토큰
