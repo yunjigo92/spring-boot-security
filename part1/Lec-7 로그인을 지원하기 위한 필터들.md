@@ -3,9 +3,11 @@
 ## 스프링이 지원하는 로그인 방식들
 
 - 스프링은 아래와 같은 로그인 방식들을 지원합니다.
+
   <img src="../images/fig-5-2-user-login.png" width="300" style="max-width:600px;width:100%;" />
 
 - 스프링이 인증 처리는 세션과는 별도로 동작하도록 설계되어 있습니다. 그래서 session 을 사용하건 사용하지 않건 같은 Authentication과 AuthenticationProvider 를 사용할 수 있습니다.
+
   <img src="../images/fig-13-spring-authentication.png" width="600" style="max-width:400px;width:100%;" />
 
 - 스프링의 인증을 유지시켜주기 위해서는 session 을 이용하는 것이 개발자에게는 여러모로 편리합니다. 이후 인증은 서버가 메모리를 소모해서 세션객체를 가지고 유지시켜주는 작업을 하도록 할 수 있습니다. 세션은 브라우저의 쿠키에 JSESSIONID 값을 심어놓고, 브라우저와 서버가 이 값을 주고 받으면서 세션을 보장받을 수 있습니다.
