@@ -1,24 +1,3 @@
-# CORS
-
-- 해더 필터에 xssProtection 을 설정해 주어야 한다. 다른 사이트에서 요청하는 것을 무작정 막는다. 옳지 않은 요청이다.
-  ``java
-  protected void configure(HttpSecurity http) throws Exception {
-  http
-  .headers((headers) ->
-  headers
-  .contentTypeOptions(withDefaults())
-  .xssProtection(withDefaults())
-  .cacheControl(withDefaults())
-  .httpStrictTransportSecurity(withDefaults())
-  .frameOptions(withDefaults()
-  );
-  }
-
-  ```
-
-
-  ```
-
 # CSRF
 
 - CsrfTokenRepository 가 HttpSession 에 저장됩니다.
