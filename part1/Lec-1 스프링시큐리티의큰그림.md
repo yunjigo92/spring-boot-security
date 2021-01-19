@@ -36,7 +36,7 @@
   - _RequestCacheAwareFilter_ : 방금 요청한 request 이력이 다음에 필요할 수 있으니 캐시에 담아놓을께.
   - _SecurityContextHolderAwareRequestFilter_ : 보안 관련 Servlet 3 스펙을 지원하기 위한 필터라고 한다.(?)
   - _RememberMeAuthenticationFilter_ : 아직 Authentication 인증이 안된 경우라면 RememberMe 쿠키를 검사해서 인증 처리해줄께
-  - _AnonymouseAuthenticationFilter_ : 아직도 인증이 안되었으면 너는 Anonymouse 사용자야
+  - _AnonymousAuthenticationFilter_ : 아직도 인증이 안되었으면 너는 Anonymous 사용자야
   - _SessionManagementFilter_ : 서버에서 지정한 세션정책을 검사할께.
   - _ExcpetionTranslationFilter_ : 나 이후에 인증이나 권한 예외가 발생하면 내가 잡아서 처리해 줄께.
   - _FilterSecurityInterceptor_ : 여기까지 살아서 왔다면 인증이 있다는 거니, 니가 들어가려고 하는 request 에 들어갈 자격이 있는지 그리고 리턴한 결과를 너에게 보내줘도 되는건지 마지막으로 내가 점검해 줄께.

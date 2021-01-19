@@ -36,7 +36,7 @@ Authentication 을 담고 있고 전달해주기 위한 문맥객체
   - TestingAuthenticationToken
   - PreAuthenticatedAuthenticationToken
   - RunAsUserToken
-  - AnonymouseAuthenticationtoken
+  - AnonymousAuthenticationtoken
 - Authentication 인증 이전에는 AuthenticationManager 의 authenticate() 메쏘드의 인자로 인증을 받기위한 input 으로도 쓰이고, 인증이 끝나면 SecurityContext에 담아서 인증된 결과로 사용되는 객체이다.
 
 ---
@@ -106,7 +106,7 @@ Authentication 을 담고 있고 전달해주기 위한 문맥객체
 
 ## OpenID
 
-## Anonymouse
+## Anonymous
 
 ## PreAuthentication
 

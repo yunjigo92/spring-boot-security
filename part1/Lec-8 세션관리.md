@@ -1,18 +1,57 @@
 # 세션 관리
 
-## ConcurrentAuthenticationFilter
+서버는 기본적으로 사용자를 보면서 판단할 수 없습니다. 서버는 로그인을 통해 요청을 보낸 사용자를 구분합니다. 하지만 모든 요청에 아이디/패스워드를 물어볼 수는 없습니다. 그래서 토큰을 발급하고, 세션에는 토큰을 저장해 놓고 세션이 유지되는 동안, 혹은 remember-me 토큰이 있다면 해당 토큰이 살아있는 동안 로그인 없이 해당 토큰만으로 사용자를 인증하고 요청을 처리해 줍니다.
 
-- 동시 세션의 개수를 제한할 수 있다. 만약 세션의 개수를 초과하는 경우
+그래서 악의적으로 정보를 취하고자 하는 사람들(해커)은 세션을 탈취하기 위한 시도를 합니다. 해커들이 사용하는 구멍은 다음과 같습니다. (단, 해커는 사용자의 아이디/비번은 모른다고 가정합니다. 아이디/비번이 알려지면 막을 수 있는 방법이 많지 않습니다. 매번 로그인 하던 IP이거나 지역이 완전히 다른 곳의 IP인 경우 의심을 해보는 정도 일 것입니다.)
 
-  - 이전 사용자 세션 만료
-  - 추가 로그인 하려는 사용자의 세션 만료
+- 로그인한 사용자의 세션아이디를 탈취한다면 서버에게 나를 속일 수 있음
+
+## ConcurrentSessionFilter
+
+- SessionRegistry 를 사용한다. 이 빈을 이용해 세션사용자(SessionInformation)를 모니터링 할 수 있습니다.
+
+  <img src="../images/fig-16-concurrent-session.png" width="600" style="max-width:600px;width:100%;" />
+
+- 만료된 세션에 대한 요청인 경우 세션 즉시 종료. 세션 만료에 대한 판단은 SessionManagementFilter 의 ConcurrentSessionControlAuthenticationStrategy 에서 처리합니다.
+
+- 문제점
+  - 동시에 한 User만 접속해서 사용하도록 하는 서비스라면 Remember-Me 옵션을 사용하지 않는 것이 좋습니다. 기본적으로 RememberMe 토큰을 발급받은 사용자는 SessionRegistry에 등록되지 않습니다. 구지 그렇게 한 이유는 아마도 RememberMe의 AuthenticationSuccessHandler 를 사용해 구현해서 쓰라는 의도인 것 같습니다.
+
+## SessionManagementFilter
+
+- SessionAuthenticationStrategy 에서 여러가지 세션 인증 정책을 관리하도록 설정할 수 있습니다.
+
+  - 세션 생성 정책
+  - 세션 아이디 고정 설정
+  - 동시접근 허용 문제
+  - 세션 타임아웃 문제
+
+  ```java
+  http
+    .sessionManagement(session->session
+        .sessionFixation(fix->fix.changeSessionId())
+        .maximumSessions(1)
+        .maxSessionsPreventsLogin(false)
+        .expiredUrl("/session-expired")
+    )
+  ```
+
+  <img src="../images/fig-17-session-management.png" width="600" style="max-width:600px;width:100%;" />
+
+- SessionFixationProtectionStrategy : 세션 고정 문제 해결
+
+  1. 브라우저로 서버에 접속합니다.
+  2. 정상 사용자의 브라우저에 내 브라우저의 세션값을 주입합니다.
+  3. 정상 사용자가 해당 사이트에 로그인 하기만 하면 내 브라우저로 마치 인증된 사용자인 것처럼 리소스에 접근할 수 있습니다.
+
+  - 해결방법 : 서버에서 로그인을 시도하면 이전 세션을 invalidate 시키고 새로운 세션을 만들어서 인증을 해줍니다.
+
+- ConcurrentSessionControlAuthenticationStrategy : 동시 세션의 개수 제한. RegisterSessionAuthenticationStrategy 와 함께 SessionRegistry 를 참조해 작업 합니다.
 
 - 세션 정책
+
   - Always : 항상 세션을 생성함
   - If_Required : 필요시 생성
   - Never : 생성하지 않음. 존재하면 사용함.
   - Stateless : 생성하지 않음. 존재해도 사용하지 않음.
-
-## 실습을 통해 확인할 내용
-
--
+  - session

@@ -1,9 +1,9 @@
 # 로그인 하기
 
-- 스프링 프레임워크에서 로그인을 한다는 것은 authenticated 가 true인 Authentication 객체를 SecurityContext 에 갖고 있는 상태를 말합니다. 단 Authentication이 AnonymouseAuthenticationToken 만 아니면 됩니다.
+- 스프링 프레임워크에서 로그인을 한다는 것은 authenticated 가 true인 Authentication 객체를 SecurityContext 에 갖고 있는 상태를 말합니다. 단 Authentication이 AnonymousAuthenticationToken 만 아니면 됩니다.
 
   ```
-  로그인 == Authentication(authenticated = true) only if Authentication != AnonymouseAuthenticationToken
+  로그인 == Authentication(authenticated = true) only if Authentication != AnonymousAuthenticationToken
   ```
 
 ## Authentication (인증)의 기본 구조
@@ -14,13 +14,13 @@
 
 - 인증 토큰(Authentication)을 제공하는 필터들
 
-  - UsernamePasswordAuthenticationFilter : 폼 로그인
-  - RememberMeAuthenticationFilter : remember-me 쿠키 로그인
-  - AnonymouseAuthenticationFilter : 로그인하지 않았다는 것을 인증함
+  - UsernamePasswordAuthenticationFilter : 폼 로그인 -> UsernamePasswordAuthenticationToken
+  - RememberMeAuthenticationFilter : remember-me 쿠키 로그인 -> RememberMeAuthenticationToken
+  - AnonymousAuthenticationFilter : 로그인하지 않았다는 것을 인증함 -> AnonymousAuthenticationToken
   - SecurityContextPersistenceFilter : 기존 로그인을 유지함(기본적으로 session 을 이용함)
   - BearerTokenAuthenticationFilter : JWT 로그인
-  - BasicAuthenticationFilter : ajax 로그인
-  - OAuth2LoginAuthenticationFilter : 소셜 로그인
+  - BasicAuthenticationFilter : ajax 로그인 -> UsernamePasswordAuthenticationToken
+  - OAuth2LoginAuthenticationFilter : 소셜 로그인 -> OAuth2LoginAuthenticationToken, OAuth2AuthenticationToken
   - OpenIDAuthenticationFilter : OpenID 로그인
   - Saml2WebSsoAuthenticationFilter : SAML2 로그인
   - ... 기타

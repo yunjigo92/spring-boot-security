@@ -6,11 +6,9 @@
 
 실제로 스프링 시큐리티를 써서 서비스를 만들라고 하면, 대부분의 개발자들은 UserDetails 를 구현한 User 객체와 UserDetailsService 부터 만듭니다.
 왜냐하면, UserDetailsService와 UserDetails 구현체만 구현하면 스프링 시큐리티가 나머지는 쉽게 쓸 수 있도록 도움을 많이 주기 때문입니다.
-그런 다음, 나머지 부분은 하나하나 설정을 배워가면서 처리하는 식이죠.
+그런 다음, 나머지 부분은 하나하나 설정을 배워가면서 처리하는 되기 때문이죠.
 
 그렇다면 우리도 UserDetailsService와 UserDetails를 구현해 보도록 하겠습니다.
-
-그런 다음 Student 를 UserDetails를 구현한 구현체로, StudentManager를 UserDetialsService 를 구현한 구현체로 확장해 보겠습니다.
 
 ## 실습하기
 
@@ -112,7 +110,5 @@ spring:
 ## 실습 하기
 
 - login-userdetails 폴더를 만든다.
-- Student Entity와 Repository 를 만든다.
+- user-admin comp 모듈을 만들고, SpUser, SpAuthority Entity와 Repository 를 만든다.
 - h2 DB 를 세팅한다.
-- UserDetails 와 UserDetailsService 를 만든다.
-- 로그인 이력을 history 에 남기기

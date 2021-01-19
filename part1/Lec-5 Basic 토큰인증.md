@@ -33,7 +33,7 @@
 
 - SecurityContext 를 저장하고 있는 저장소에서 만료되지 않은 인증이 있으면 SecurityContextHolder 에 넣어줍니다. 이전에는 HttpSessionContextIntegrationFilter 이란 필터가 있었는데, 저장소가 반드시 세션일 필요는 없기 때문에 추상화된 객체로 발전된 필터라고 볼 수 있습니다.
 
-- HttpSessionSecurityContextRepository : 서버 세션에 SecurityContext 를 저장하는 기본 저장소이다.
+- HttpSessionSecurityContextRepository : 서버 세션에 SecurityContext 를 저장하는 기본 저장소.
 
 ## Bearer 토큰
 
