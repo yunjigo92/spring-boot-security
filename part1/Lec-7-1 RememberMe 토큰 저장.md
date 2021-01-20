@@ -4,6 +4,33 @@
 
 ### 실습 시나리오
 
+### 로그아웃 이벤트를 프린트 하도록 한다.
+
+```java
+   @Bean
+   public ServletListenerRegistrationBean<HttpSessionEventPublisher> httpSessionEventPublisher() {
+       return new ServletListenerRegistrationBean<HttpSessionEventPublisher>(new HttpSessionEventPublisher(){
+           @Override
+           public void sessionCreated(HttpSessionEvent event) {
+               super.sessionCreated(event);
+               System.out.printf("===>> [%s] 세션 생성됨 %s \n", LocalDateTime.now(), event.getSession().getId());
+           }
+
+           @Override
+           public void sessionDestroyed(HttpSessionEvent event) {
+               super.sessionDestroyed(event);
+               System.out.printf("===>> [%s] 세션 만료됨 %s \n", LocalDateTime.now(), event.getSession().getId());
+           }
+
+           @Override
+           public void sessionIdChanged(HttpSessionEvent event, String oldSessionId) {
+               super.sessionIdChanged(event, oldSessionId);
+               System.out.printf("===>> [%s] 세션 아이디 변경  %s:%s \n",  LocalDateTime.now(), oldSessionId, event.getSession().getId());
+           }
+       });
+   }
+```
+
 #### TokenBasedRememberMeServices
 
 - user/1111 을 기본 사용자로 등록합니다. SecurityConfig에 아래와 같이 TokenBasedRememberMeServices 를 설정합니다.

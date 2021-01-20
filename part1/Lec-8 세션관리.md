@@ -2,9 +2,7 @@
 
 서버는 기본적으로 사용자를 보면서 판단할 수 없습니다. 서버는 로그인을 통해 요청을 보낸 사용자를 구분합니다. 하지만 모든 요청에 아이디/패스워드를 물어볼 수는 없습니다. 그래서 토큰을 발급하고, 세션에는 토큰을 저장해 놓고 세션이 유지되는 동안, 혹은 remember-me 토큰이 있다면 해당 토큰이 살아있는 동안 로그인 없이 해당 토큰만으로 사용자를 인증하고 요청을 처리해 줍니다.
 
-그래서 악의적으로 정보를 취하고자 하는 사람들(해커)은 세션을 탈취하기 위한 시도를 합니다. 해커들이 사용하는 구멍은 다음과 같습니다. (단, 해커는 사용자의 아이디/비번은 모른다고 가정합니다. 아이디/비번이 알려지면 막을 수 있는 방법이 많지 않습니다. 매번 로그인 하던 IP이거나 지역이 완전히 다른 곳의 IP인 경우 의심을 해보는 정도 일 것입니다.)
-
-- 로그인한 사용자의 세션아이디를 탈취한다면 서버에게 나를 속일 수 있음
+그래서 악의적으로 정보를 취하고자 하는 사람들(해커)은 세션을 탈취하기 위한 시도를 합니다. 따라서 세션 관리에 헛점이 없도록 구성의 기본 내용을 잘 알아야 합니다.
 
 ## ConcurrentSessionFilter
 
@@ -15,7 +13,10 @@
 - 만료된 세션에 대한 요청인 경우 세션 즉시 종료. 세션 만료에 대한 판단은 SessionManagementFilter 의 ConcurrentSessionControlAuthenticationStrategy 에서 처리합니다.
 
 - 문제점
-  - 동시에 한 User만 접속해서 사용하도록 하는 서비스라면 Remember-Me 옵션을 사용하지 않는 것이 좋습니다. 기본적으로 RememberMe 토큰을 발급받은 사용자는 SessionRegistry에 등록되지 않습니다. 구지 그렇게 한 이유는 아마도 RememberMe의 AuthenticationSuccessHandler 를 사용해 구현해서 쓰라는 의도인 것 같습니다.
+  - 서블릿 컨테이너(톰켓)로 부터 HttpSessionEventPublisher 를 리스닝 하도록 listener로 등록해야 합니다.
+  - 톰켓의 세션과는 별도로 session을 SessionRegistry의 SessionInformation 에서 관리합니다.
+  - SessionRegistry 의 세션 정보를 expire 시키면 톰켓에서 세션을 아무리 허용하더라도 애플리케이션 내로 들어와서 활동할 수 없습니다.
+  - SessionRegistry 에는 Authentication 으로 등록된 사용자만 모니터링 합니다.
 
 ## SessionManagementFilter
 

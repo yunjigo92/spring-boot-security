@@ -45,7 +45,6 @@
   - 로그아웃하게 다른 곳에 묻혀놓은 remember-me 쿠키값도 쓸모가 없게 됩니다. 만약 다른 곳에서 remember-me로 로그인한 쿠키를 살려놓고 싶다면, series 로 삭제하도록 logout 을 수정해야 합니다.
 - 특징
   - Remeberme로 로그인한 사용자는 UsernamePasswordAuthenticationToken 이 아닌 RememberMeAuthenticationToken 으로 서비스를 이용하는 것입니다. 같은 사용자이긴 하지만, 토큰의 종류가 다르게 구분되어 있습니다.
-  - 만약 서버에서 한개의 세션으로 사용자를 제한하고 싶을때, RememberMe 로그인은 동시사용 로직에서 체크하지 않습니다.
 
 ## AnonymousAuthenticationFilter
 
