@@ -32,6 +32,8 @@
     .sessionManagement(session->session
         .sessionFixation(fix->fix.changeSessionId())
         .maximumSessions(1)
+        .key("remember-me")
+        .tokenValiditySeconds(30*24*60*60)
         .maxSessionsPreventsLogin(false)
         .expiredUrl("/session-expired")
     )

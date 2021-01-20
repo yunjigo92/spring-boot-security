@@ -4,7 +4,7 @@
 
 - 스프링은 아래와 같은 로그인 방식들을 지원합니다.
 
-  <img src="../images/fig-5-2-user-login.png" width="300" style="max-width:300px;width:100%;" />
+  <img src="../images/fig-5-2-user-login.png" width="400" style="max-width:400px;width:100%;" />
 
 - 스프링이 인증 처리는 세션과는 별도로 동작하도록 설계되어 있습니다. 그래서 session 을 사용하건 사용하지 않건 같은 Authentication과 AuthenticationProvider 를 사용할 수 있습니다.
 
