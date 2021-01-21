@@ -8,6 +8,8 @@
 
   <img src="../images/fig-18-authentication-authorization.png" width="600" style="max-width:600px;width:100%;" />
 
+---
+
 ## FilterSecurityInterceptor
 
   <img src="../images/fig-20-filtersecurityinterceptor.png" width="600" style="max-width:600px;width:100%;" />
@@ -19,9 +21,16 @@
   - finallyInvocation : RunAs 권한을 제거한다.
   - afterInvocation : AfterInvocationManager 를 통해 체크가 필요한 사항을 체크한다. 특별히 설정하지 않으면 AfterInvocationManager 는 null 이다.
 
+---
+
 ## ExceptionTranslationFilter
 
 이 필터는 FilterSecurityInterceptor 나 애플리케이션에서 올라오는 오류를 가로채 처리하는 작업을 한다.
+
+- AuthenticationException과 AccessDeniedException만 처리한다.
+- 그 밖의 오류는 보통 ControllerAdvice 를 이용해서 처리하는 것을 권장한다.
+
+  <img src="../images/fig-21-exception-translation-filter.png" width="600" style="max-width:600px;width:100%;" />
 
 ### 401 에러와 403 에러
 
