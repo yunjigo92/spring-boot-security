@@ -1,3 +1,7 @@
+# 스프링 시큐리티의 권한
+
+  <img src="../images/fig-22-authorization.png" width="400" style="max-width:400px;width:100%;" />
+
 AccessDecisionVoter 를 만들어서 테스트 한다.
 
 ## AccessDecisionManager : 권한 위원회
