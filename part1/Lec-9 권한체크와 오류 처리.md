@@ -15,20 +15,20 @@
   <img src="../images/fig-20-filtersecurityinterceptor.png" width="600" style="max-width:600px;width:100%;" />
 
 - SecurityInterceptor : AccessDecisionManager 를 통해 권한여부를 판단하고 통과시켜주거나 Deny 합니다.
-- 주요 처리 로직이 아래와 같다.
+- 주요 처리 로직이 아래와 같습니다.
   <img src="../images/fig-19-filtersecurityinterceptor-invoke.png" width="600" style="max-width:600px;width:100%;" />
-  - beforeInvodation : Security Config 에서 설정한 접근 제한을 체크한다.
-  - finallyInvocation : RunAs 권한을 제거한다.
-  - afterInvocation : AfterInvocationManager 를 통해 체크가 필요한 사항을 체크한다. 특별히 설정하지 않으면 AfterInvocationManager 는 null 이다.
+  - beforeInvodation : Security Config 에서 설정한 접근 제한을 체크합니다.
+  - finallyInvocation : RunAs 권한을 제거합니다.
+  - afterInvocation : AfterInvocationManager 를 통해 체크가 필요한 사항을 체크합니다. 특별히 설정하지 않으면 AfterInvocationManager 는 null 입니다.
 
 ---
 
 ## ExceptionTranslationFilter
 
-이 필터는 FilterSecurityInterceptor 나 애플리케이션에서 올라오는 오류를 가로채 처리하는 작업을 한다.
+이 필터는 FilterSecurityInterceptor 나 애플리케이션에서 올라오는 오류를 가로채 처리하는 작업을 합니다.
 
-- AuthenticationException과 AccessDeniedException만 처리한다.
-- 그 밖의 오류는 보통 ControllerAdvice 를 이용해서 처리하는 것을 권장한다.
+- AuthenticationException과 AccessDeniedException만 처리합니다.
+- 그 밖의 오류는 보통 ControllerAdvice 를 이용해서 처리하는 것을 권장합니다.
 
   <img src="../images/fig-21-exception-translation-filter.png" width="600" style="max-width:600px;width:100%;" />
 
@@ -37,16 +37,16 @@
 - 401 : 인증 실패
 
   - AuthenticationException
-  - 다시 로그인 해야 하므로 AuthenticationEntryPoint 로 처리를 넘긴다.
+  - 다시 로그인 해야 하므로 AuthenticationEntryPoint 로 처리를 넘깁니다.
 
 - 403 : 권한 없음
 
   - AccessDeniedException
-  - Anonymous 유저이거나 RememberMe 유저이면 다시 로그인 하도록 AuthenticationEntryPoint 로 처리를 넘긴다.
-  - 그 밖의 유저는 권한없음 페이지로 이동하거나 권한없음 메시지를 받는다.
+  - Anonymous 유저이거나 RememberMe 유저이면 다시 로그인 하도록 AuthenticationEntryPoint 로 처리를 넘깁니다.
+  - 그 밖의 유저는 권한없음 페이지로 이동하거나 권한없음 메시지를 받습니다.
 
 ### AuthenticationEntryPoint
 
 - void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException;
 
-- 웹페이지라면 로그인 페이지로 이동하고, 클라이언트 애플리케이션이라면 재로그인하라는 메시지를 보낸다.
+- 웹페이지라면 로그인 페이지로 이동하고, 클라이언트 애플리케이션이라면 재로그인하라는 메시지를 보냅니다.
