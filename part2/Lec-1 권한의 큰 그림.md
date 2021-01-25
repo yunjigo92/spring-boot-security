@@ -22,7 +22,7 @@
 - 스프링 시큐리티에서 인증(Authentication)과 권한(Authorization)은 두 개의 큰 축입니다.
 -
 
-<img src="../images/fig-18-authentication-authorization.png" width="600" style="max-width:600px;width:100%;" />
+<img src="../images/fig-18-authentication-authorization-2.png" width="600" style="max-width:600px;width:100%;" />
 
 - 인증이 Filter 영역에서 구현되는 반면 권한은 Filter 영역과 servlet 영역에서 모두 구현되어 적용됩니다.
 - 인증이 AuthenticationFilter 를 가지고 Authentication을 발급해주는 관계였다면, 권한은 SecurityInterceptor 에서 Access Granted 와 Denied 를 판정하는 결과를 만들어 내는 대응 관계를 가지고 있습니다.
