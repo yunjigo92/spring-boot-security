@@ -50,3 +50,28 @@
 - void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException;
 
 - 웹페이지라면 로그인 페이지로 이동하고, 클라이언트 애플리케이션이라면 재로그인하라는 메시지를 보냅니다.
+
+## AuthenticationException
+
+- InsufficientAuthenticationException : credential 값이 부족할 때
+- AccountStatusException :
+
+  - LockedException
+  - CredentialsExpiredException
+  - DisabledException
+  - LockedException
+
+- AuthenticationCredentialsNotFoundException : 서블릿 컨텍스트에서 Authentication이 없을 때
+- AuthenticationServiceException : 서버 문제로 인증 서비스를 처리해 줄 수 없을 때. (500)
+- BadCredentialsException : credentials 값이 invalid 할 때
+- RememberMeAuthenticationException
+  - CookieTheftException
+  - InvalidCookieException
+- InsufficientAuthenticationException :
+- AuthenticationServiceException
+  - InternalAuthenticationServiceException
+- NonceExpiredException
+- ProviderNotFoundException
+- PreAuthenticatedCredentialsNotFoundException
+- SessionAuthenticationException
+- UsernameNotFoundException
