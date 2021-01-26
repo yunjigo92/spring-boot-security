@@ -38,6 +38,7 @@
 
   - AuthenticationException
   - 다시 로그인 해야 하므로 AuthenticationEntryPoint 로 처리를 넘깁니다.
+  - AuthenticationException이 발생했다고 서버가 반드시 401 에러를 내려보내는 것은 아닙니다. 해당 에러를 401 오류로 처리하는 코드를 넣어햐 합니다. 필요에 따라서는 403 오류코드로 처리하기도 합니다.
 
 - 403 : 권한 없음
 
