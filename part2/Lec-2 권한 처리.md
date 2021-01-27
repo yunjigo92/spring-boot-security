@@ -18,6 +18,7 @@ Voter 기반의 AccessDecisionManager 를 이해하려면 각 Voter 들이 어�
   - Role Hierarchy 장치를 사용할 수 있음.
 - Authority
   - 다양한 권한을 설계할 수 있는 유연한 구조임.
+  - SCOPE\_ 처럼 앞에 prefix 를 두어 grouping 하는 관습이 있다.
 
 ## AccessDecisionVoter
 
@@ -65,25 +66,28 @@ WebSecurityConfigurarAdapter 에서 설정합니다.
 
 <img src="../images/fig-23-security-expression-root.png" width="600" style="max-width:600px;width:100%;" />
 
+- SecurityExpressionRoot 에 메소드를 추가해서 사용할 수 있습니다.
+
 ## 메쏘드에서 권한 체크 하기
 
 - GlobalMethodSecurityConfiguration 에서 AccessDecisionManager 를 설정합니다.
 - 아래와 같은 표현식을 사용할 수 있다.
 
-| 표현식                                                               | 의미                                                                                                                                                     |
-| -------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| hasRole(String role)                                                 | princial 이 해당 role을 가지고 있으면 true                                                                                                               |
-| hasAnyRole(String... roles)                                          | principal 이 제시한 role 중에 한개라도 있으면 true.                                                                                                      |
-| hasAuthority(String authority)                                       | principal 이 제시한 authority를 가지고 있으면 true                                                                                                       |
-| principal                                                            | 인증서의 principal 객체에 바로 접근 가능                                                                                                                 |
-| permitAll                                                            | 모두 허용                                                                                                                                                |
-| denyAll                                                              | 모두 거부                                                                                                                                                |
-| isAnonymous()                                                        | 익명사용자                                                                                                                                               |
-| isRememberMe()                                                       | 자동 로그인 사용자                                                                                                                                       |
-| isAuthenticated()                                                    | 익명사용자가 아니면 true                                                                                                                                 |
-| isFullyAuthenticated()                                               | 익명사용자나 자동로그인한 사용자가 아니면 true                                                                                                           |
-| hasPermission(Object target, Object permission)                      | Returns true if the user has access to the provided target for the given permission. For example, hasPermission(domainObject, 'read')                    |
-| hasPermission(Object targetId, String targetType, Object permission) | Returns true if the user has access to the provided target for the given permission. For example, hasPermission(1, 'com.example.domain.Message', 'read') |
+| 표현식                                                               | 의미                                                                                                                   |
+| -------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| hasRole(String role)                                                 | princial 이 해당 role을 가지고 있으면 true                                                                             |
+| hasAnyRole(String... roles)                                          | principal 이 제시한 role 중에 한개라도 있으면 true.                                                                    |
+| hasAuthority(String authority)                                       | principal 이 제시한 authority를 가지고 있으면 true                                                                     |
+| hasAnyAuthority(String... authority)                                 | principal 이 제시한 authority중에 한개라도 가지고 있으면 true                                                          |
+| principal                                                            | 인증서의 principal 객체에 바로 접근 가능                                                                               |
+| permitAll                                                            | 모두 허용                                                                                                              |
+| denyAll                                                              | 모두 거부                                                                                                              |
+| isAnonymous()                                                        | 익명사용자                                                                                                             |
+| isRememberMe()                                                       | 자동 로그인 사용자                                                                                                     |
+| isAuthenticated()                                                    | 익명사용자가 아니면 true                                                                                               |
+| isFullyAuthenticated()                                               | 익명사용자나 자동로그인한 사용자가 아니면 true                                                                         |
+| hasPermission(Object target, Object permission)                      | 유저가 타겟이 되는 객체에 permission이 있으면 true. 예를 들어, hasPermission(domainObject, 'read')                     |
+| hasPermission(Object targetId, String targetType, Object permission) | 유저가 해당 아이디의 객체에 permission이 있으면 true, 예를 들어 hasPermission(1, 'com.example.domain.Message', 'read') |
 
 ### 1. PreInvocationAuthorizationAdviceVoter
 
@@ -107,3 +111,7 @@ Role 기반의 권한은 리눅스부터 아파치, 톰켓등 IT 초기부터 �
 - 권한 계층 선언 : RoleHierarchyVoter
 
 <img src="../images/fig-24-access-decision-manager.png" width="600" style="max-width:600px;width:100%;" />
+
+## 참고 자료
+
+- https://www.baeldung.com/spring-security-create-new-custom-security-expression
