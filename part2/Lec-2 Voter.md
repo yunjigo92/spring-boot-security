@@ -40,6 +40,11 @@ Role 기반의 권한은 리눅스부터 아파치, 톰켓등 IT 초기부터 �
 - SpEL(Spring Expression Language)은 스프링3 에서 부터 사용하기 시작해 그 실용성이 입증되기 시작합니다.
 - 스프링 Security 에서도 이 SpEL을 사용해 권한 검증을 하나의 Voter로 통일하기 시작합니다. 그래서 결국 의미있게 남은 Voter 는 WebExpressionVoter와 PIAAVoter 밖에 남지 않았다고 볼 수 있습니다.
 
+### SpEL
+
+Spring Expression Language 는 표현식을 통해 객체의 값을 가져오거나 동작을 시켜주는 기능을 합니다.사실상 컴파일언어라고 할 수 있는 자바를 스크립트언어처럼 동작하게 해주는 기능입니다.
+<img src="../images/fig-26-SpEL.png" width="600" style="max-width:600px;width:100%;" />
+
 ## SecurityExpressionRoot
 
 <img src="../images/fig-23-security-expression-root.png" width="600" style="max-width:600px;width:100%;" />
@@ -63,11 +68,6 @@ Role 기반의 권한은 리눅스부터 아파치, 톰켓등 IT 초기부터 �
 - 그 밖의 선생님과 학생은 시험지를 볼 수 없음.
 
 이런 경우라면 당연히 어떤 시험지인지, 그리고 그 시험지에 대한 열람 권한이 누구에게 있는지... 여러가지 데이터들이 모여야 해당 권한을 판단할 수가 있습니다. 이런 경우에는 PermissionEvaluator 를 사용하거나 객체 별로 접근 권한을 DB로 관리해주는 ACL 처럼 권한을 체크하기 위한 별도의 설계가 들어가야 합니다.
-
-### SpEL
-
-Spring Expression Language 는 표현식을 통해 객체의 값을 가져오거나 동작을 시켜주는 기능을 합니다.사실상 컴파일언어라고 할 수 있는 자바를 스크립트언어처럼 동작하게 해주는 기능입니다.
-<img src="../images/fig-26-SpEL.png" width="600" style="max-width:600px;width:100%;" />
 
 ## WebExpressionVoter와 PIIAVoter
 
