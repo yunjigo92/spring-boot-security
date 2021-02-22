@@ -15,10 +15,13 @@ Voter 기반의 AccessDecisionManager 를 이해하려면 각 Voter 들이 어�
 
 <img src="../images/fig-25-voters-1.png" width="600" style="max-width:600px;width:100%;" />
 
+## @Secured 어노테이션 기반 Voter
+
 ### RoleVoter
 
 Role 기반의 권한은 리눅스부터 아파치, 톰켓등 IT 초기부터 전통적으로 구현해서 사용하던 가장 직관적인 권한 체계입니다. 하지만, Role 을 기반으로 권한을 판단하기엔, 상황이 너무 다양해졌죠. 그래서 Role 을 확장한 Authority 기반의 권한 체계를 사용하고 있습니다. 그렇지만, 기존의 Role 기반이 가지고 있는 직관적이고 계층적인 사용성을 그대로 사용할 수 있도록 해주기 위해 RoleVoter가 쓰입니다.
 
+- @Secured("ROLE_USER")
 - ROLE_xxx : GrantedAuthority
 - 권한 계층 선언 : RoleHierarchyVoter
 
@@ -26,8 +29,9 @@ Role 기반의 권한은 리눅스부터 아파치, 톰켓등 IT 초기부터 �
 
 인증(통행증)을 받았다면 그 인증의 종류가 어떤 종류인지를 판단합니다. 이제 막 인증을 받고 들어온 사용자와 RememberMe 토큰을 통해서 들어온 사용자와 익명 사용자를 구분하기 위해 쓰입니다. RememberMe 인증 사용자는 탈취된 토큰을 가지고 들어온 사용자일 수 있기 때문에 필요한 경우 한번 더 인증을 요구할 수 있습니다.
 
-- fully authenticated
-- remember me
+- authenticated
+  - fully authenticated
+  - remember me
 - anonymous
 
 ## SpEL을 사용하는 Voter
@@ -50,7 +54,7 @@ Spring Expression Language 는 표현식을 통해 객체의 값을 가져오거
 <img src="../images/fig-23-security-expression-root.png" width="600" style="max-width:600px;width:100%;" />
 
 - permitAll, denyAll
-- hasRole, hasAnyROle, hasAuthority, hasAnyAuthority : RoleVoter의 기능을 대신해 줍니다. 이전에는 Role을 쓰더라도 ROLE*를 사용해서 권한을 판정해야 했기 때문에 ROLE*를 앞에 붙여줘야 하는지, 말아야 하는지 햇갈리는 경우가 많았습니다. 이제는 method 에서 Role 로 판단을 할지 Authority로 판단을 할지 명확하게 구분해 줍니다.
+- hasRole, hasAnyRole, hasAuthority, hasAnyAuthority : RoleVoter의 기능을 대신해 줍니다. 이전에는 Role을 쓰더라도 ROLE*를 사용해서 권한을 판정해야 했기 때문에 ROLE*를 앞에 붙여줘야 하는지, 말아야 하는지 햇갈리는 경우가 많았습니다. 이제는 method 에서 Role 로 판단을 할지 Authority로 판단을 할지 명확하게 구분해 줍니다.
 - isAnonymous, isAuthenticated, isFullyAuthenticated : AuthenticatedVoter 의 기능을 대체합니다.
 - hasPermission
   - target : 대상 객체를 보고 permission을 검사합니다.
@@ -69,7 +73,7 @@ Spring Expression Language 는 표현식을 통해 객체의 값을 가져오거
 
 이런 경우라면 당연히 어떤 시험지인지, 그리고 그 시험지에 대한 열람 권한이 누구에게 있는지... 여러가지 데이터들이 모여야 해당 권한을 판단할 수가 있습니다. 이런 경우에는 PermissionEvaluator 를 사용하거나 객체 별로 접근 권한을 DB로 관리해주는 ACL 처럼 권한을 체크하기 위한 별도의 설계가 들어가야 합니다.
 
-## WebExpressionVoter와 PIIAVoter
+## WebExpressionVoter와 PIIAVoter (@PreAuthorize 어노테이션 기반)
 
 WebExpressionVoter와 PIIAVoter 는 모두 아래와 같은 방식으로 SpEL 을 사용합니다.
 <img src="../images/fig-23-security-expression-root-2.png" width="600" style="max-width:600px;width:100%;" />
