@@ -47,6 +47,7 @@ Role 기반의 권한은 리눅스부터 아파치, 톰켓등 IT 초기부터 �
 ### SpEL
 
 Spring Expression Language 는 표현식을 통해 객체의 값을 가져오거나 동작을 시켜주는 기능을 합니다.사실상 컴파일언어라고 할 수 있는 자바를 스크립트언어처럼 동작하게 해주는 기능입니다.
+
 <img src="../images/fig-26-SpEL.png" width="600" style="max-width:600px;width:100%;" />
 
 ## SecurityExpressionRoot
