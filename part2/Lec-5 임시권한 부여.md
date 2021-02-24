@@ -31,27 +31,27 @@ public Object invoke(MethodInvocation mi) throws Throwable {
 ```java
 
 protected InterceptorStatusToken beforeInvocation(Object object) {
-    ...
+	...
 
-		// Attempt to run as a different user
-		Authentication runAs = this.runAsManager.buildRunAs(authenticated, object, attributes);
-		if (runAs != null) {
-			SecurityContext origCtx = SecurityContextHolder.getContext();
-			SecurityContextHolder.setContext(SecurityContextHolder.createEmptyContext());
-			SecurityContextHolder.getContext().setAuthentication(runAs);
-			// need to revert to token.Authenticated post-invocation
-			return new InterceptorStatusToken(origCtx, true, attributes, object);
-		}
-		// no further work post-invocation
-		return new InterceptorStatusToken(SecurityContextHolder.getContext(), false, attributes, object);
-
+	// Attempt to run as a different user
+	Authentication runAs = this.runAsManager.buildRunAs(authenticated, object, attributes);
+	if (runAs != null) {
+		SecurityContext origCtx = SecurityContextHolder.getContext();
+		SecurityContextHolder.setContext(SecurityContextHolder.createEmptyContext());
+		SecurityContextHolder.getContext().setAuthentication(runAs);
+		// need to revert to token.Authenticated post-invocation
+		return new InterceptorStatusToken(origCtx, true, attributes, object);
 	}
+	// no further work post-invocation
+	return new InterceptorStatusToken(SecurityContextHolder.getContext(), false, attributes, object);
 
-  protected void finallyInvocation(InterceptorStatusToken token) {
-		if (token != null && token.isContextHolderRefreshRequired()) {
-			SecurityContextHolder.setContext(token.getSecurityContext());
-		}
+}
+
+protected void finallyInvocation(InterceptorStatusToken token) {
+	if (token != null && token.isContextHolderRefreshRequired()) {
+		SecurityContextHolder.setContext(token.getSecurityContext());
 	}
+}
 
 ```
 
@@ -61,9 +61,9 @@ protected InterceptorStatusToken beforeInvocation(Object object) {
 public class RunAsManagerImpl implements RunAsManager, InitializingBean {
 
   public Authentication buildRunAs(
-      Authentication authentication,
-      Object object,
-			Collection<ConfigAttribute> attributes
+		Authentication authentication,
+		Object object,
+		Collection<ConfigAttribute> attributes
   ) {
 		List<GrantedAuthority> newAuthorities = new ArrayList<>();
 		for (ConfigAttribute attribute : attributes) {

@@ -22,38 +22,38 @@ Authentication 통행증만 가지고는 권한 체크를 충분히 했다고 �
 ### AfterInvocationProviderManager
 
 ```java
-	public Object decide(
-        Authentication authentication,
-        Object object,
-        Collection<ConfigAttribute> config,
-        Object returnedObject
-  ) throws AccessDeniedException {
+public Object decide(
+  Authentication authentication,
+  Object object,
+  Collection<ConfigAttribute> config,
+  Object returnedObject
+) throws AccessDeniedException {
 
-		Object result = returnedObject;
-		for (AfterInvocationProvider provider : this.providers) {
-			result = provider.decide(authentication, object, config, result);
-		}
-		return result;
+	Object result = returnedObject;
+	for (AfterInvocationProvider provider : this.providers) {
+		result = provider.decide(authentication, object, config, result);
 	}
+	return result;
+}
 ```
 
 ### PostInvocationAdviceProvider
 
 ```java
-  public Object decide(
-        Authentication authentication,
-        Object object,
-        Collection<ConfigAttribute> config,
-        Object returnedObject
-  ) throws AccessDeniedException {
+public Object decide(
+  Authentication authentication,
+  Object object,
+  Collection<ConfigAttribute> config,
+  Object returnedObject
+) throws AccessDeniedException {
 
-		PostInvocationAttribute postInvocationAttribute = findPostInvocationAttribute(config);
-		if (postInvocationAttribute == null) {
-			return returnedObject;
-		}
-		return this.postAdvice.after(authentication, (MethodInvocation) object, postInvocationAttribute,
-				returnedObject);
+	PostInvocationAttribute postInvocationAttribute = findPostInvocationAttribute(config);
+	if (postInvocationAttribute == null) {
+		return returnedObject;
 	}
+	return this.postAdvice.after(authentication, (MethodInvocation) object, postInvocationAttribute,
+				returnedObject);
+}
 ```
 
 ### ExpressionBasedPostInvocationAdvice
@@ -61,31 +61,27 @@ Authentication 통행증만 가지고는 권한 체크를 충분히 했다고 �
 - GlobalMethodSecurityConfiguration 에서 expressHandler 를 ExpressionBasedPreInvocationAdvice 와 함께 공유합니다. 이 말은 @PreAuthorize @PreFilter 와 같은 SpEL 루트 객체를 가지고 작업한다는 말이 됩니다.
 
 ```java
-  public Object after(
-      Authentication authentication,
-      MethodInvocation mi,
-      PostInvocationAttribute postAttr,
-      Object returnedObject
-  ) throws AccessDeniedException {
+public Object after(
+  Authentication authentication,
+  MethodInvocation mi,
+  PostInvocationAttribute postAttr,
+  Object returnedObject
+) throws AccessDeniedException {
 
-		PostInvocationExpressionAttribute pia = (PostInvocationExpressionAttribute) postAttr;
-		EvaluationContext ctx = this.expressionHandler.createEvaluationContext(authentication, mi);
-		Expression postFilter = pia.getFilterExpression();
-		Expression postAuthorize = pia.getAuthorizeExpression();
-		if (postFilter != null) {
-			this.logger.debug(LogMessage.format("Applying PostFilter expression %s", postFilter));
-			if (returnedObject != null) {
-				returnedObject = this.expressionHandler.filter(returnedObject, postFilter, ctx);
-			}
-			else {
-				this.logger.debug("Return object is null, filtering will be skipped");
-			}
+	PostInvocationExpressionAttribute pia = (PostInvocationExpressionAttribute) postAttr;
+	EvaluationContext ctx = this.expressionHandler.createEvaluationContext(authentication, mi);
+	Expression postFilter = pia.getFilterExpression();
+	Expression postAuthorize = pia.getAuthorizeExpression();
+	if (postFilter != null) {
+		if (returnedObject != null) {
+			returnedObject = this.expressionHandler.filter(returnedObject, postFilter, ctx);
 		}
-		this.expressionHandler.setReturnObject(returnedObject, ctx);
-		if (postAuthorize != null && !ExpressionUtils.evaluateAsBoolean(postAuthorize, ctx)) {
-			this.logger.debug("PostAuthorize expression rejected access");
-			throw new AccessDeniedException("Access is denied");
-		}
-		return returnedObject;
 	}
+	this.expressionHandler.setReturnObject(returnedObject, ctx);
+	if (postAuthorize != null && !ExpressionUtils.evaluateAsBoolean(postAuthorize, ctx)) {
+		throw new AccessDeniedException("Access is denied");
+	}
+	return returnedObject;
+}
+
 ```
