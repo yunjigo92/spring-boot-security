@@ -10,6 +10,13 @@ Expression 기반의 권한 체크가 편리하고 권장되기는 하지만,
 @Secured 는 또한 Voter 를 추가할 수 있도록 설계되었습니다.
 때문에 Voter 기반의 AccessDecisionManager 와 잘 어울리기는 합니다.
 
+  <img src="../images/fig-20-filtersecurityinterceptor-2.png" width="700" style="max-width:700px;width:100%;" />
+
+메소드의 권한 체크는 MethodSecurityInterceptor 를 통해
+intercept된 메소드의 전후로 체크가 이루어집니다.
+
+<img src="../images/fig-27-methodsecurity-metadatasource.png" width="700" style="max-width:700px;width:100%;" />
+
 ## GlobalMethodSecurityConfiguration
 
 메소드 권한을 설정하는 GlobalMethodSecurityConfiguration 에서 methodSecurityMetadataSource() 를 만들어 내는 곳에서 어노테이션을 파싱해 MethodSecurityMetadataSource 를 만들어 낸다.
@@ -42,13 +49,6 @@ public MethodSecurityMetadataSource methodSecurityMetadataSource() {
   return new DelegatingMethodSecurityMetadataSource(sources);
 }
 ```
-
-  <img src="../images/fig-20-filtersecurityinterceptor-2.png" width="700" style="max-width:700px;width:100%;" />
-
-메소드의 권한 체크는 MethodSecurityInterceptor 를 통해
-intercept된 메소드의 전후로 체크가 이루어집니다.
-
-<img src="../images/fig-27-methodsecurity-metadatasource.png" width="700" style="max-width:700px;width:100%;" />
 
 ## Method Security Meta Annotations
 
