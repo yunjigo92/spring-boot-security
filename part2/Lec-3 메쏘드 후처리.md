@@ -9,7 +9,7 @@ MethodSecurityInterceptor 에서 중요한 멤버는 아래 세가지 입니다.
 - AfterInvocationManager : @PostAuthorize, @PostFilter 를 처리합니다.
 - RunAsManager : 임시권한 부여
 
-<img src="../images/fig-24-access-decision-manager.png" width="600" style="max-width:600px;width:100%;" />
+<img src="../images/fig-24-access-decision-manager.png" width="700" style="max-width:700px;width:100%;" />
 
 ## AfterInvocationManager
 
