@@ -17,12 +17,16 @@ intercept된 메소드의 전후로 체크가 이루어집니다.
 
 ## Method Security Meta Annotations
 
-코드의 가독성을 향상시키기 위해 meta annotation을 쓸수도 있다. 반복되는 복잡한 표현식이 있다면 특별히 유용하다. 예를들면 이렇다
+코드의 가독성을 향상시키기 위해 meta annotation을 쓸수도 있습니다. 반복되는 복잡한 표현식이 있다면 특별히 유용합니다.
+
+예를들어 아래와 같은 권한 체크가 빈번하다면
 
 @PreAuthorize("#contact.name == authentication.name")
-을
 
+```java
 @Retention(RetentionPolicy.RUNTIME)
 @PreAuthorize("#contact.name == authentication.name")
 public @interface ContactPermission {}
-위와같이 할수있다. 단, JSR-250 스펙은 지원되지 않음
+```
+
+위와같이 annotation을 추가해서 재활용할 수 있습니다.
