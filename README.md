@@ -37,26 +37,6 @@
 
 ## 실전 프로젝트
 
-##
+강의에 사용한 소스는 아래 github 사이트를 통해 받아보실 수 있습니다. master 에는 초기 설정만 되어 있구요.. 각 각의에서 지정한 branch 로 이동을 하셔서 테스트를 진행하실 수 있습니다.
 
-- 인증 방식에 따라
-
-  - 폼 인증
-  - JWT 인증
-  - oauth2 인증
-
-- 서버의 세션 상태에 따라
-
-  - sessionful
-  - sessionless
-
-- 데이터 관리
-  - In Memory
-  - JPA
-  - Mongo Data
-  - LDAP
-  - etc ...
-
-## 권한 관리
-
-## 실전 프로젝트
+프로젝트 소스 : https://github.com/jongwon/sp-fastcampus-spring-sec
