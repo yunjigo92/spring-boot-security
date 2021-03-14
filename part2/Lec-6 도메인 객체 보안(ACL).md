@@ -1,8 +1,8 @@
-# AOP 를 활용한 동적 권한 설계
+# ACL 을 이용한 도메인 객체 권한 관리
 
-권한 체크가 단순한 권한(Authority)만으로 어려운 복잡한 경우가 있을 수 있습니다.
+도메인 객체에 대한 접근 권한은 hasPermission() 메소드를 이용해 판별하면 편리합니다. 그런데, 모든 도메인 객체에 대해 이런 접근 권한을 처음부터 설계하려면 많은 노하우가 필요합니다. 스프링 시큐리티는 이를 위해 spring-security-acl 라이브러리를 제공합니다.
 
-아래는 Spring Security 스펙에서 ACL이 필요한 경우를 설명하기 위해 만든 권한 체크의 3요소 입니다.
+아래는 Spring Security 스펙에서 ACL을 설명하기 위해 만든 권한 체크의 3요소 입니다.
 
 - 누가 (Authentication)
 - 어떤 메소드에서 (MethodInvocation)
@@ -24,6 +24,13 @@
 - ACL_ENTRY : 접근 권한 정보
   - Ace_order:
   - Mask : 접근 권한 정보 ( READ,WRITE,ADMIN)
+
+## spring-cache 기술
+
+- 스프링은 AOP를 이용해 데이터를 캐싱하는 spring-cache 라이브리러리를 제공합니다.
+- https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-caching
+- https://download.oracle.com/otn-pub/jcp/jcache-1_0-fr-eval-spec/JSR107FinalSpecification.pdf
+- 기본적으로 ACL 은 spring-cache 를 쓰도록 설계되어 있습니다.
 
 ## ACL 기술의 장점
 
