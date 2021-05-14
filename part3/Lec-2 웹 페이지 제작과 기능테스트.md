@@ -41,5 +41,7 @@
   - 결과 시험지 리스트
     - 시험 결과
 
-참고 사이트 : https://velog.io/@bread_dd/Spring-Boot-Devtools
-참고 사이트 : http://progtrend.blogspot.com/2019/05/thymeleaf.html
+참고 사이트
+
+- https://velog.io/@bread_dd/Spring-Boot-Devtools
+- http://progtrend.blogspot.com/2019/05/thymeleaf.html
