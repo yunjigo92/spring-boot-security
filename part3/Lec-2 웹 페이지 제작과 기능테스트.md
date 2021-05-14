@@ -13,8 +13,9 @@
 
 ## thymeleaf
 
-- th:text
-- th:replace / th:include
+- 기본 문법
+- 템플릿 이용하는 방법
+- layout 설정하기
 
 ## 사이트 맵
 
@@ -41,3 +42,4 @@
     - 시험 결과
 
 참고 사이트 : https://velog.io/@bread_dd/Spring-Boot-Devtools
+참고 사이트 : http://progtrend.blogspot.com/2019/05/thymeleaf.html

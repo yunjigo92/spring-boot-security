@@ -20,28 +20,27 @@
 
 - text : 텍스트 내용
 - utext : html
-- value : 값
+- attr (혹은 th:value, th:src, th:href) : 엘리먼트 attribute 값을 지정
 - with : 변수값 지정
 - switch, case : switch 문
 - if : 조건문
 - unless : 부정 조건문
 - each object : 반복문
-- classappend : 기존에 class가 있을 때, 로직으로 클래스를 추가할 때 사용
+- class, classappend : 기존에 class가 있을 때, 로직으로 클래스를 추가할 때 사용
 
-### layout
+### template
 
 - replace : 해당 엘리먼트를 template 의 엘리먼트로 대체합니다.
 - include : block 문을 하위 엘리먼트로 넣어줍니다.
 - fragment : html 태그 조각으로 재활용이 가능합니다.
+- block
 
-### spring security 관련한 extra 속성
+## layout
 
-7. input type value (5회)
-8. a/link href, script src (5회)
-9. with (2회)
-10. action method="post" (1회)
-11. class (1회)
+- layout:decorator
+- layout:fragment
 
 ## 참고자료
 
 - https://eblo.tistory.com/57 : layout 화면 구성
+- http://progtrend.blogspot.com/2019/05/thymeleaf.html : thymeleaf 기본 문법을 정리해 놓은 블로그
