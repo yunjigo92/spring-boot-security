@@ -9,6 +9,8 @@
 
 ## 메인 화면 가져오기
 
+<img src="../images/fig-31-site-main.png" width="600" style="max-width:600px;width:100%;" />
+
 메인 화면 html 을 아래와 같이 가져옵니다.
 
 ```html

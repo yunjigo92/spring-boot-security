@@ -1,5 +1,7 @@
 # 사이트 작업
 
+<img src="../images/fig-31-site-main.png" width="600" style="max-width:600px;width:100%;" />
+
 ## 관리자 사이트
 
 관리자 사이트의 메인 화면을 만듭니다.
