@@ -14,6 +14,7 @@
 
 - xmlns:th="http://www.thymeleaf.org
 - xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+- xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 
 ### 명령어 (th:\*)
 
@@ -24,6 +25,23 @@
 - switch, case : switch 문
 - if : 조건문
 - unless : 부정 조건문
-- each : 반복문
+- each object : 반복문
+- classappend : 기존에 class가 있을 때, 로직으로 클래스를 추가할 때 사용
+
+### layout
+
+- replace : 해당 엘리먼트를 template 의 엘리먼트로 대체합니다.
+- include : block 문을 하위 엘리먼트로 넣어줍니다.
+- fragment : html 태그 조각으로 재활용이 가능합니다.
 
 ### spring security 관련한 extra 속성
+
+7. input type value (5회)
+8. a/link href, script src (5회)
+9. with (2회)
+10. action method="post" (1회)
+11. class (1회)
+
+## 참고자료
+
+- https://eblo.tistory.com/57 : layout 화면 구성
