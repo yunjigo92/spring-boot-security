@@ -1,11 +1,27 @@
 # OAuth2
 
-sns 사이트 로그인하기
+## CommonOAuth2Provider
 
-## 구글
+- GOOGLE
+- GITHUB
+- FACEBOOK
+- OKTA
 
-## 페이스북
+## 추가 가능한 OAuth2Provider ...
 
-## 네이버
+- naver
+- kakao
 
-## 카카오
+## OAuth2User
+
+- facebook, naver, kakao
+- OAuth2User : UserDetails 를 대체합니다.
+- OAuth2UserService : UserDetailsService 를 대체합니다. 기본 구현체는 DefaultOAuth2UserService 입니다.
+
+<img src="../images/fig-36-oauth2-service.png" width="500" style="max-width:500px;width:100%;" />
+
+## OidcUser
+
+- google
+- OidcUser
+- OidcUserService : DefaultOidcUserService
