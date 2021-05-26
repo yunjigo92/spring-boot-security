@@ -18,10 +18,16 @@ okta 에서 만든 jjwt 라이브러리를 사용합니다.
 - JWS : RFC7515 https://datatracker.ietf.org/doc/html/rfc7515
 - JWE : RFC7516 https://datatracker.ietf.org/doc/html/rfc7516
 
-- JWT 토큰의 구조를 설명한다.
-- JWT 토큰을 이용해 토큰을 발행하고 검증하는 것을 테스트 한다.
+## jwt.io 사이트
 
-<img src="../images/fig-35-session-token.png" width="500" style="max-width:500px;width:100%;" />
+<img src="../images/fig-35-jwt-structure.png" width="600" style="max-width:600px;width:100%;" />
+
+- JWT 토큰의 구조 : header + body + signature
+- 구현 라이브러리
+  - java-jwt : oauth0.io
+  - jjwt : okta
+
+<img src="../images/fig-35-session-token.png" width="600" style="max-width:600px;width:100%;" />
 
 ## JWT 스펙에서 지정한 claim
 
@@ -37,19 +43,19 @@ okta 에서 만든 jjwt 라이브러리를 사용합니다.
 ### 토큰에는 어떤 내용을 넣어야 할까?
 
 - 일반적으로는 인증에 필요한 최소한의 데이터를 넣슶니다.
-  비밀번호나 전화번호등을 넣는 것은 안전하지 않습니다.
-  이 토큰은 언제든 공개할 수 있는 정보를 넣는 것이 좋습니다.
-  왜냐하면 서버에서 인증된 키가 아니라도 언제든 서버는 이 토큰을 열어서 그 안에 어떤 Claim 이 있는지를 볼 수 있습니다.
+- 비밀번호나 전화번호등을 넣는 것은 안전하지 않습니다.
+- 이 토큰은 언제든 공개할 수 있는 정보를 넣는 것이 좋습니다.
+- 왜냐하면 서버에서 인증된 키가 아니라도 언제든 서버는 이 토큰을 열어서 그 안에 어떤 Claim 이 있는지를 볼 수 있습니다.
 
 ## 토큰을 어떻게 관리할 것인가?
 
-이론적으로는 토큰을 클라이언트가 관리하게 한다고 하지만, 실제로 서버는 사용자 정보 캐싱이나 토큰의 유효성 평가, 혹은 refresh 토큰 정책을 위해 서버에 토큰을 관리하기도 합니다. 이 경우, 토큰과 사용자 정보를 관리하는 방법으로 다음과 같은 방법들을 사용하기도 합니다.
+- 이론적으로는 토큰을 클라이언트가 관리하게 합니다.
+- 하지만, 실제로 서버는 사용자 정보 캐싱이나 토큰의 유효성 평가, 혹은 refresh 토큰 정책을 위해 서버에 토큰을 관리하기도 합니다.
+- 이 경우, 토큰과 사용자 정보를 관리하는 방법으로 다음과 같은 방법들을 사용하기도 합니다.
+  - redis, hazelcast
+  - db 저장
 
-- redis
-- db 저장
-- 그냥 클라이언트에만 저장
-
-## 간단한 SSO 사이트 구현하기
+## 간단한 SSO 사이트 구현할 때
 
 인증 서버를 두고, 해당 인증서버로부터 토큰의 유효성을 검증하다록 하는 방식이 이상적이지만, 토큰을 다루는 방식이 동일하다면, 한 서버에서 발행한 토큰으로 SSO와 같은 효과를 볼 수도 있습니다.
 
@@ -59,4 +65,3 @@ okta 에서 만든 jjwt 라이브러리를 사용합니다.
 참고자료
 
 - https://www.gartner.com/reviews/market/access-management
--
